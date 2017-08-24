@@ -1,0 +1,24 @@
+{
+  "name": "Language-Interpretation-Recognition-Interface",
+  "version": "1.0.0",
+  "description": "<h1>Language Interpretation Recognition Interface</h1>\r <h2>Author: Ritter Gustave</h2>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rGustave07/Language-Interpretation-Recognition-Interface.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rGustave07/Language-Interpretation-Recognition-Interface/issues"
+  },
+  "homepage": "https://github.com/rGustave07/Language-Interpretation-Recognition-Interface#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7",
+    "twitter": "^1.7.1"
+  }
+}
