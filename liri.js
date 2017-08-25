@@ -2,11 +2,13 @@
 
 // Beginning of variable definition
 var keys = require('./unlock.js');
+var request = require('request');
 var twitter = require('twitter');
 var spotify = require('node-spotify-api');
 var twitterclient = new twitter(keys.twitterKeys);
 var spotifyclient = new spotify(keys.spotifyKeys);
 var command = process.argv[2];
+var queryURL = "http://www.omdbapi.com/?apikey=" + keys.omdbkey.apikey + "&?t="
 // EO variable definition
 
 
@@ -26,7 +28,6 @@ switch (command) {
     break;
 
   case 'spotify-this-song':
-    console.log("SpotifyThisSong case activated");
     spotifyclient.search({ type: 'track', query: process.argv[3] }, function(err, data) {
         if (err) {
       return console.log('Error occurred: ' + err);
@@ -37,10 +38,13 @@ switch (command) {
 
   case 'movie-this':
     console.log("moviethis case activated")
+    request(queryURL + process.argv[3], function (error, response, body){
+      console.log(JSON.stringify(response));
+    })
     break;
 
   case 'test':
-    console.log(params);
+    console.log(keys.omdbkey.apikey);
 
   default:
     console.log("Cannot compute");
