@@ -8,7 +8,7 @@ var spotify = require('node-spotify-api');
 var twitterclient = new twitter(keys.twitterKeys);
 var spotifyclient = new spotify(keys.spotifyKeys);
 var command = process.argv[2];
-var queryURL = "http://www.omdbapi.com/?apikey=" + keys.omdbkey.apikey + "&?t="
+var queryURL = "http://www.omdbapi.com/?apikey=" + keys.omdbkey.apikey + "?t="
 // EO variable definition
 
 
@@ -32,14 +32,14 @@ switch (command) {
         if (err) {
       return console.log('Error occurred: ' + err);
     }
-      console.log(data);
+      console.log(data.tracks.items[0]);
     });
     break;
 
   case 'movie-this':
     console.log("moviethis case activated")
     request(queryURL + process.argv[3], function (error, response, body){
-      console.log(JSON.stringify(response));
+      console.log(response);
     })
     break;
 
