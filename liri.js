@@ -37,7 +37,7 @@ switch (command) {
     break;
 
   case 'movie-this':
-    console.log("moviethis case activated")
+    console.log("movie-this case activated")
     request(queryURL + process.argv[3], function (error, response, body){
       console.log(response);
     })
