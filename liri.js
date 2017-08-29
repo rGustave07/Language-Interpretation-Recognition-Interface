@@ -15,17 +15,7 @@ var queryURL = "http://www.omdbapi.com/?apikey=" + keys.omdbkey.apikey + "&t="
 
 switch (command) {
   case 'my-tweets':
-    twitterclient.get('statuses/user_timeline', {screen_name: process.argv[3]}, function(error, tweets, response){
-      if (!error){
-        for ( var i = 0; i < 20; i++ ){
-          if(tweets[i]){
-            console.log(tweets[i].text);
-          }
-        }
-      } else {
-        console.log(error.stack);
-      }
-    })
+  tweets();
     break;
 
   case 'spotify-this-song':
@@ -38,6 +28,35 @@ switch (command) {
     break;
 
   case 'movie-this':
+    movies();
+    break;
+
+  case 'do-what-it-says':
+    fs.readFile('./random.txt', "utf-8", function(err, data){
+        console.log(data);
+    });
+    break;
+
+  default:
+    console.log("Cannot compute");
+}
+
+// Start of function declarations
+function tweets() {
+    twitterclient.get('statuses/user_timeline', {screen_name: process.argv[3]}, function(error, tweets, response){
+      if (!error){
+        for ( var i = 0; i < 20; i++ ){
+          if(tweets[i]){
+            console.log(tweets[i].text);
+          }
+        }
+      } else {
+        console.log(error.stack);
+      }
+    })
+};
+
+function movies(){
     console.log("movie-this case activated")
     request(queryURL + process.argv[3], function (error, response, body){
       console.log(response.body);
@@ -47,14 +66,5 @@ switch (command) {
         console.log(response.body);
       })
     }
-    break;
-
-  case 'do-what-it-says':
-    fs.readFile('./random.txt', "utf-8", function(err, data){
-        console.log(data);
-    });
-    break;
-    
-  default:
-    console.log("Cannot compute");
 }
+// End of function declarations
