@@ -5,10 +5,11 @@ var keys = require('./unlock.js');
 var request = require('request');
 var twitter = require('twitter');
 var spotify = require('node-spotify-api');
+var fs = require('fs');
 var twitterclient = new twitter(keys.twitterKeys);
 var spotifyclient = new spotify(keys.spotifyKeys);
 var command = process.argv[2];
-var queryURL = "http://www.omdbapi.com/?apikey=" + keys.omdbkey.apikey + "?t="
+var queryURL = "http://www.omdbapi.com/?apikey=" + keys.omdbkey.apikey + "&t="
 // EO variable definition
 
 
@@ -39,13 +40,21 @@ switch (command) {
   case 'movie-this':
     console.log("movie-this case activated")
     request(queryURL + process.argv[3], function (error, response, body){
-      console.log(response);
+      console.log(response.body);
     })
+    if (process.argv[3] = ""){
+      request(queryURL + "Mr. Nobody", function (error, response, body){
+        console.log(response.body);
+      })
+    }
     break;
 
-  case 'test':
-    console.log(keys.omdbkey.apikey);
-
+  case 'do-what-it-says':
+    fs.readFile('./random.txt', "utf-8", function(err, data){
+        console.log(data);
+    });
+    break;
+    
   default:
     console.log("Cannot compute");
 }
